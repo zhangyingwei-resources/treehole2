@@ -5,7 +5,6 @@
     <title>首页</title>
 </head>
 <body>
-    hello this is treehole bolg;<br>
-    编号: ${id!}
+    hello this is treehole bolg;${id!}
 </body>
 </html>
