@@ -6,4 +6,5 @@ package com.zhangyingwei.treehole.common;
 public class Pages {
     public static final String INDEX = "index";
     public static final String INSTALL = "install";
+    public static final String ADMIN = "admin/admin";
 }

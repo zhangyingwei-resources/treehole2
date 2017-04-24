@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>首页</title>
+    <title>admin</title>
 </head>
 <body>
-    hello this is treehole bolg;<br>
-    编号: ${id!}
+hello this is treehole bolg admin;<br>
 </body>
 </html>
