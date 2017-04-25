@@ -8,7 +8,9 @@
     <script src="/dist/zui/js/zui.min.js"></script>
     <script src="/dist/is/is.min.js" ></script>
     <script src="/dist/layer/layer.js" ></script>
-    <script src="/dist/des/js/des.js" ></script>
+    <script src="/dist/cryptojs/components/core.js" ></script>
+    <script src="/dist/cryptojs/components/cipher-core.js" ></script>
+    <script src="/dist/cryptojs/components/des.js" ></script>
     <script src="/js/install.js" ></script>
     <title>steps</title>
 </head>

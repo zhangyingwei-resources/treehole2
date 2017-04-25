@@ -136,7 +136,16 @@ $(function(){
             var inputs = $(step).find("input")
             db.url = $(inputs[0]).val();
             db.username = $(inputs[1]).val();
-            db.password = strEnc($(inputs[2]).val(),"treehole");
+            db.password = $(inputs[2]).val();
+
+            var keyHex = CryptoJS.enc.Utf8.parse("treehole");
+            var encrypted = CryptoJS.DES.encrypt(db.password, keyHex, {
+                mode: CryptoJS.mode.ECB,
+                padding: CryptoJS.pad.Pkcs7
+            });
+
+            console.log(encrypted.toString())
+
             var loadIndex = layer.load(1);
             $.ajax({ //valid database infomation
                 type: "POST",
