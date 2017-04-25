@@ -28,7 +28,7 @@ public class InstallController {
     private Logger logger = LoggerFactory.getLogger(InstallController.class);
 
     @RequestMapping
-    public String install(Map<String,Object> model){
+    public String page(Map<String,Object> model){
         Boolean installed = TreeHoleUtils.isInstalled();
         try {
             logger.info("mark as install");
@@ -52,5 +52,11 @@ public class InstallController {
         }else{
             return Ajax.success("不是MySQL数据库");
         }
+    }
+
+    @PostMapping("/db/make")
+    @ResponseBody
+    public Map makeDatabase(){
+        return Ajax.success("");
     }
 }

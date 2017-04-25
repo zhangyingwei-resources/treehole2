@@ -8,6 +8,7 @@
     <script src="/dist/zui/js/zui.min.js"></script>
     <script src="/dist/is/is.min.js" ></script>
     <script src="/dist/layer/layer.js" ></script>
+    <script src="/dist/des/js/des.js" ></script>
     <script src="/js/install.js" ></script>
     <title>steps</title>
 </head>
@@ -19,54 +20,54 @@
         <div class="steps panel-body" >
             <div class="step">
                 <span class="hidden info">database</span>
-                <span class="hidden">MySql数据库信息配置</span>
+                <span class="hidden msg">MySql数据库信息配置</span>
                 <div>
                     <div class="input-group">
                         <span class="input-group-addon">数据库地址</span>
-                        <input type="text" class="form-control not-empty" placeholder="数据库地址">
+                        <input type="text" name="dburl" class="form-control not-empty" placeholder="数据库地址">
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">用户名</span>
-                        <input type="text" class="form-control not-empty" placeholder="用户名">
+                        <input type="text" name="dbusername" class="form-control not-empty" placeholder="用户名">
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">密码</span>
-                        <input type="text" class="form-control not-empty" placeholder="密码">
+                        <input type="text" name="dbpassword" class="form-control not-empty" placeholder="密码">
                     </div>
                 </div>
             </div>
             <div class="step">
-                <span class="hidden">博客信息配置</span>
+                <span class="hidden msg">博客信息配置</span>
                 <div>
                     <div class="input-group">
                         <span class="input-group-addon">博客名称</span>
-                        <input type="text" class="form-control not-empty" placeholder="博客名称">
+                        <input type="text" name="blogname" class="form-control not-empty" placeholder="博客名称">
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">绑定网址</span>
-                        <input type="text" class="form-control" placeholder="网址">
+                        <input type="text" name="blogurl" class="form-control" placeholder="网址">
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">博客简介</span>
-                        <textarea class="form-control" rows="3" placeholder="简介"></textarea>
+                        <textarea name="blogdesc" class="form-control" rows="3" placeholder="简介"></textarea>
                     </div>
                 </div>
             </div>
             <div class="step">
-                <span class="hidden">管理端登录信息配置</span>
+                <span class="hidden msg">管理端登录信息配置</span>
                 <div>
                     <div class="input-group">
                         <span class="input-group-addon">用户名</span>
-                        <input type="text" class="form-control not-empty" placeholder="用户名">
+                        <input type="text" name="adminusername" class="form-control not-empty" placeholder="用户名">
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">密码</span>
-                        <input type="password" id="passwd" class="form-control not-empty" placeholder="密码">
+                        <input type="password" name="adminpassword" id="passwd" class="form-control not-empty" placeholder="密码">
                     </div>
                     <br>
                     <div class="input-group">

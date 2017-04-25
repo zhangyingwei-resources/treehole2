@@ -44,7 +44,7 @@ $(function(){
         console.log(index<steps.length-1)
         var validToNext = true;
         if(index<steps.length-1){
-            validToNext = validStep(steps[index]) && callBack(steps[index])
+            validToNext = validStep(steps[index]) && callBack(steps[index],index)
             if(validToNext){
                 closeStep(steps,index)
                 index++
@@ -103,7 +103,7 @@ $(function(){
      * show one step
      */
     function showSteps() {
-        const text = $(steps[index]).children(":first").text()
+        const text = $(steps[index]).children(".msg").text()
         $("#step-tip").text("第 " + (index + 1) + " 步" +" ["+" "+text+" "+"]")
         $(steps[index]).show(0)
     }
@@ -128,16 +128,17 @@ $(function(){
      * @param step
      * @returns {boolean}
      */
-    function nextStep(step){
+    function nextStep(step,index){
         var type = $(step).find(".info").text();
+        var resultFlag = true;
         if(type === 'database'){
             var db = {}
             var inputs = $(step).find("input")
             db.url = $(inputs[0]).val();
             db.username = $(inputs[1]).val();
-            db.password = $(inputs[2]).val();
+            db.password = strEnc($(inputs[2]).val(),"treehole");
             var loadIndex = layer.load(1);
-            $.ajax({
+            $.ajax({ //valid database infomation
                 type: "POST",
                 async:false,
                 url:"/install/db/mysql",
@@ -145,15 +146,15 @@ $(function(){
                 success:function(data){
                     layer.close(loadIndex)
                     if(data.message === "验证成功"){
-                        return true;
+                        resultFlag = true;
                     }else{
                         layer.msg("数据库验证失败");
-                        return false;
+                        resultFlag = false;
                     }
                 }
             })
-            return false;
         }
+        return resultFlag;
     }
 
     /**
@@ -182,13 +183,23 @@ $(function(){
      * 2 submit all info
      */
     function submit(){
-        console.log("submit")
         validStep(steps[steps.length-1])
         validPasswd()
         if(!canNext){
             return;
         }
+        var data = {}
+        data.url = $("input[name=dburl]").val();
+        data.username = $("input[name=dbusername]").val();
+        data.password = $("input[name=dbpassword]").val();
+        data.blogname = $("input[name=blogname]").val();
+        data.blogurl = $("input[name=blogurl]").val();
+        data.blogdesc = $("input[name=blogdesc]");
+        data.adminusername = $("input[name=adminusername]").val();
+        data.adminpassword = $("input[name=adminpassword]").val();
+        console.log(data)
         var loading = layer.load(1)
+        layer.close(loading);
     }
 
     /**
