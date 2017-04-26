@@ -1,30 +1,27 @@
 package com.zhangyingwei.treehole.install.model;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * Created by zhangyw on 2017/4/24.
- * model of database info
- * url
- * username
- * password
+ * Created by zhangyw on 2017/4/26.
+ * 管理端配置信息
  */
+public class
 
-public class DbConf {
-    @NotEmpty(message = "url不能为空")
-    private String url;
+
+AdminConf {
+    /**
+     * 用户名
+     */
     @NotEmpty(message = "用户名不能为空")
     private String username;
+    /**
+     * 密码
+     */
     @NotEmpty(message = "密码不能为空")
+    @Length(min = 6,message = "长度不能小于6位")
     private String password;
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public String getUsername() {
         return username;
@@ -44,9 +41,8 @@ public class DbConf {
 
     @Override
     public String toString() {
-        return "DbConf{" +
-                "url='" + url + '\'' +
-                ", username='" + username + '\'' +
+        return "AdminConf{" +
+                "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

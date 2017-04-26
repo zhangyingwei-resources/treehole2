@@ -137,15 +137,6 @@ $(function(){
             db.url = $(inputs[0]).val();
             db.username = $(inputs[1]).val();
             db.password = $(inputs[2]).val();
-
-            var keyHex = CryptoJS.enc.Utf8.parse("treehole");
-            var encrypted = CryptoJS.DES.encrypt(db.password, keyHex, {
-                mode: CryptoJS.mode.ECB,
-                padding: CryptoJS.pad.Pkcs7
-            });
-
-            console.log(encrypted.toString())
-
             var loadIndex = layer.load(1);
             $.ajax({ //valid database infomation
                 type: "POST",
@@ -206,9 +197,122 @@ $(function(){
         data.blogdesc = $("input[name=blogdesc]");
         data.adminusername = $("input[name=adminusername]").val();
         data.adminpassword = $("input[name=adminpassword]").val();
-        console.log(data)
         var loading = layer.load(1)
+
+        /**
+         * dbinfo
+         * @type {{}}
+         */
+        var dbinfo = {}
+        dbinfo.url = data.url;
+        dbinfo.username = data.username;
+        dbinfo.password = data.password;
+        /**
+         * bloginfo
+         * @type {{}}
+         */
+        var bloginfo = {};
+        bloginfo.name = data.blogname;
+        bloginfo.url = data.blogurl;
+        bloginfo.desc = data.blogdesc;
+
+        /**
+         * admininfo
+         * @type {{}}
+         */
+        var admininfo = {};
+        admininfo.username = data.adminusername;
+        admininfo.password = data.adminpassword;
+
+        /**
+         * init blog system step
+         *  1 init database
+         *  2 init bloginfo
+         *  3 init admininfo
+         */
+        if(dbMake(dbinfo)){
+            if(blogInit(bloginfo)){
+                if(adminInit(admininfo)){
+
+                }
+            }
+        }
+
         layer.close(loading);
+
+    }
+
+    /**
+     * 初始化数据库
+     * @param dbinfo
+     * @returns {boolean}
+     */
+    function dbMake(dbinfo){
+        layer.msg("正在初始化数据库")
+        var initsucc = false;
+        $.ajax({
+            type: "POST",
+            async:false,
+            url:"/install/db/make",
+            data:dbinfo,
+            success: function(data){
+                layer.msg("初始化数据库成功")
+                initsucc = true;
+            },
+            error: function (data) {
+                layer.msg("初始化数据库失败")
+                initsucc = false;
+            }
+        })
+        return initsucc;
+    }
+    /**
+     * 初始化博客信息
+     * @param bloginfo
+     * @returns {boolean}
+     */
+    function blogInit(bloginfo){
+        layer.msg("正在初始化博客")
+        var initsucc = false;
+        $.ajax({
+            type: "POST",
+            async:false,
+            url:"/install/blog/init",
+            data:bloginfo,
+            success: function(data){
+                layer.msg("初始化博客成功")
+                initsucc = true;
+            },
+            error: function (data) {
+                layer.msg("初始化博客失败")
+                initsucc = false;
+            }
+        })
+        return initsucc;
+    }
+
+    /**
+     * 初始化管理信息
+     * @param admininfo
+     */
+    function adminInit(admininfo){
+        layer.msg("正在初始化管理端")
+        var initsucc = false;
+        $.ajax({
+            type: "POST",
+            async:false,
+            url:"/install/admin/init",
+            data:admininfo,
+            success: function(data){
+                layer.msg("初始化管理端成功")
+                initsucc = true;
+            },
+            error: function (data) {
+                layer.msg("初始化管理端失败")
+                initsucc = false;
+            }
+        })
+        return initsucc;
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.zhangyingwei.treehole.common.controller;
 
 import com.zhangyingwei.treehole.common.Ajax;
+import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -22,9 +23,10 @@ public class ExceptionController {
     private Logger logger = LoggerFactory.getLogger(ExceptionHandler.class);
 
     @ResponseBody
-    @ExceptionHandler(value = BindException.class)
-    public Object bindExceptionHandler(BindingResult result){
+    @ExceptionHandler(value = {BindException.class, TreeHoleException.class})
+    public Object bindExceptionHandler(Exception ex){
         logger.info("hello exception");
-        return Ajax.error(result.getFieldError().getDefaultMessage());
+        ex.printStackTrace();
+        return Ajax.error(ex.getLocalizedMessage());
     }
 }
