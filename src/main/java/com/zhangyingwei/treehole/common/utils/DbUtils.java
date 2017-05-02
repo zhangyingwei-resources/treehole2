@@ -3,6 +3,7 @@ package com.zhangyingwei.treehole.common.utils;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sqlite.core.DB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -71,5 +72,46 @@ public class DbUtils {
                 }
             }
         }
+    }
+
+    /**
+     * 执行sql语句
+     * @param sql
+     */
+    public static void execute(String sql) {
+        
+    }
+
+    private static Connection getConnection(Enum DB_CLASS, String url) {
+        Connection connection = null;
+        try {
+            if (TreeHoleEnum.DB_MYSQL_CLASS.equals(DB_CLASS)) {
+                Class.forName(TreeHoleEnum.DB_MYSQL_CLASS.getValue());
+            }
+            connection = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            logger.error(e.getLocalizedMessage(),e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            logger.error(e.getLocalizedMessage(),e);
+        }
+        return connection;
+    }
+
+    private static Connection getConnection(Enum DB_CLASS,String url, String username, String password) {
+        Connection connection = null;
+        try {
+            if (TreeHoleEnum.DB_MYSQL_CLASS.equals(DB_CLASS)) {
+                Class.forName(TreeHoleEnum.DB_MYSQL_CLASS.getValue());
+            }
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.error(e.getLocalizedMessage(), e);
+        }catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            logger.error(e.getLocalizedMessage(), e);
+        }
+        return connection;
     }
 }

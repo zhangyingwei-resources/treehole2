@@ -74,6 +74,7 @@ public class InstallController {
     @ResponseBody
     public Map makeDatabase(@Valid DbConf dbConf){
         TreeHoleUtils.makeDatabase();
+        TreeHoleUtils.makeTables();
         return Ajax.success("");
     }
 

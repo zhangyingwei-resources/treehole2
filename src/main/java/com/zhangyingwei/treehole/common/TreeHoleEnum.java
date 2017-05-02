@@ -8,7 +8,10 @@ public enum TreeHoleEnum {
     INSTALL_LOCK("install.lock"),//安装检测文件
     CONF_INSTALL_SQL("install.sql"),
     DB_MYSQL_CLASS("com.mysql.jdbc.Driver"),
-    DB_SQLITE_CLASS("org.sqlite.JDBC")
+    DB_SQLITE_CLASS("org.sqlite.JDBC"),
+    SQL_CREATE_DB("db create"),
+    SQL_CREATE_TABLE("table create"),
+
     ;
 
     private String value;
