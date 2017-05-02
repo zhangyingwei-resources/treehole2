@@ -31,10 +31,8 @@ import java.util.Map;
 @RequestMapping("/install")
 public class InstallController {
     private Logger logger = LoggerFactory.getLogger(InstallController.class);
-
     @Autowired
     private AdminInitService adminInitService;
-
     @RequestMapping
     public String page(Map<String,Object> model){
         Boolean installed = TreeHoleUtils.isInstalled();
@@ -72,10 +70,10 @@ public class InstallController {
 
     @PostMapping("/db/make")
     @ResponseBody
-    public Map makeDatabase(@Valid DbConf dbConf){
-        TreeHoleUtils.makeDatabase();
-        TreeHoleUtils.makeTables();
-        return Ajax.success("");
+    public Map makeDatabase(@Valid DbConf dbConf) throws TreeHoleException {
+        TreeHoleUtils.makeDatabase(dbConf);
+        TreeHoleUtils.makeTables(dbConf);
+        return Ajax.success("数据库初始化成功");
     }
 
     @PostMapping("/blog/init")
