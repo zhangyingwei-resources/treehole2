@@ -50,6 +50,7 @@ public class InstallController {
     @PostMapping("/db/{dbname}")
     @ResponseBody
     public Map checkDbInfo(@PathVariable("dbname") String dbName, @Valid DbConf dbConf) {
+        logger.info("database.type:"+dbName);
         if ("mysql".equals(dbName)) {
             Boolean valid = DbUtils.mysqlValid(dbConf.getUrl(), dbConf.getUsername(), dbConf.getPassword());
             if(valid){
@@ -57,15 +58,22 @@ public class InstallController {
             }else{
                 return Ajax.success("验证失败");
             }
+        }else if("sqlite".equals(dbName)){
+            Boolean valid = DbUtils.sqliteValid(dbConf.getUrl());
+            if(valid){
+                return Ajax.success("验证成功");
+            }else{
+                return Ajax.success("验证失败");
+            }
         }else{
-            return Ajax.success("不是MySQL数据库");
+            return Ajax.success("暂不支持此数据库");
         }
     }
 
     @PostMapping("/db/make")
     @ResponseBody
     public Map makeDatabase(@Valid DbConf dbConf){
-//        TreeHoleUtils
+        TreeHoleUtils.makeDatabase();
         return Ajax.success("");
     }
 
@@ -78,7 +86,12 @@ public class InstallController {
     @PostMapping("/admin/init")
     @ResponseBody
     public Map initAdmin(@Valid AdminConf adminConf) throws TreeHoleException {
-        this.adminInitService.adminInti(adminConf);
+        try {
+            this.adminInitService.adminInti(adminConf);
+        } catch (TreeHoleException e) {
+            e.printStackTrace();
+            throw new TreeHoleException(e.getMessage());
+        }
         return Ajax.success("初始化管理端成功");
     }
 }

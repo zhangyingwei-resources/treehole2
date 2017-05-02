@@ -3,7 +3,7 @@ package com.zhangyingwei.treehole.common.exception;
 /**
  * Created by zhangyw on 2017/4/26.
  */
-public class TreeHoleException extends Throwable {
+public class TreeHoleException extends Exception {
     public TreeHoleException() {
         super();
     }

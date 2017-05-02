@@ -20,7 +20,7 @@ AdminConf {
      * 密码
      */
     @NotEmpty(message = "密码不能为空")
-    @Length(min = 6,message = "长度不能小于6位")
+    @Length(min = 6,message = "密码长度不能小于6位")
     private String password;
 
     public String getUsername() {

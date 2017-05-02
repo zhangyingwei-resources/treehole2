@@ -11,6 +11,6 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface AdminInitDao {
-    @Insert("insert into treehole.admin (username,password) values (amdin.username,admin.password)")
-    public void insertOne(@Param("admin")AdminConf adminConf);
+    @Insert("insert into treehole.admin (username,password) values (#{admin.username},#{admin.password})")
+    void insertOne(@Param("admin")AdminConf adminConf);
 }

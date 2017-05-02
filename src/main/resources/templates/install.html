@@ -19,19 +19,25 @@
         <div class="steps panel-body" >
             <div class="step">
                 <span class="hidden info">database</span>
-                <span class="hidden msg">MySql数据库信息配置</span>
+                <span class="hidden msg">数据库信息配置</span>
+                <span class="hidden component">
+                    <select class="form-control" id="dbselect" style="display: none !important; width: 49% !important;">
+                        <option value="mysql">mysql</option>
+                        <option value="sqlite">sqlite</option>
+                    </select>
+                </span>
                 <div>
                     <div class="input-group">
                         <span class="input-group-addon">数据库地址</span>
                         <input type="text" name="dburl" class="form-control not-empty" placeholder="数据库地址">
                     </div>
                     <br>
-                    <div class="input-group">
+                    <div class="input-group hidden" id="input-group-username">
                         <span class="input-group-addon">用户名</span>
                         <input type="text" name="dbusername" class="form-control not-empty" placeholder="用户名">
                     </div>
                     <br>
-                    <div class="input-group">
+                    <div class="input-group hidden" id="input-group-password">
                         <span class="input-group-addon">密码</span>
                         <input type="text" name="dbpassword" class="form-control not-empty" placeholder="密码">
                     </div>

@@ -5,11 +5,13 @@ $(function(){
     var data = {}
     var index = 0;
     var canNext = true;
+    var dbName = $("#dbselect").val();//当前选择数据库
     const steps = getSetps();//select all steps
     console.log("find "+ steps.length +" steps")
     showSteps(steps,index)
     firstStep()
     addValieListener();
+    addDbSelectLinstener();
     $("#prew").click(function () {
         prew(prewStep)
     })
@@ -25,15 +27,43 @@ $(function(){
     function addValieListener(){
         $(".not-empty").blur(function(){
             const text = $(this).val()
-            if(is.empty(text)){
-                layer.tips("必填哦",$(this))
-                $(this).parent().addClass("has-error")
-                canNext = false
-            }else{
-                $(this).parent().removeClass("has-error")
-                canNext = true
+            if(!$(this).hasClass("hidden")){
+                if(is.empty(text)){
+                    layer.tips("必填哦",$(this))
+                    $(this).parent().addClass("has-error")
+                    canNext = false
+                }else{
+                    $(this).parent().removeClass("has-error")
+                    canNext = true
+                }
             }
         })
+    }
+
+    /**
+     * change the database we will use
+     */
+    function addDbSelectLinstener(){
+        console.log("addDbSelectLinstener");
+        $("#dbselect").change(function(){
+            dbName = $(this).val();
+            changeDatabase();
+        })
+    }
+
+    /**
+     *
+     * 如果数据库使用sqlite，则需要隐藏掉一些输入框
+     */
+    function changeDatabase(){
+        console.log("change database:" + dbName);
+        if(dbName === 'sqlite'){
+            $("#input-group-username").addClass("hidden");
+            $("#input-group-password").addClass("hidden");
+        }else if(dbName === 'mysql'){
+            $("#input-group-username").removeClass("hidden");
+            $("#input-group-password").removeClass("hidden");
+        }
     }
 
     /**
@@ -103,8 +133,22 @@ $(function(){
      * show one step
      */
     function showSteps() {
-        const text = $(steps[index]).children(".msg").text()
-        $("#step-tip").text("第 " + (index + 1) + " 步" +" ["+" "+text+" "+"]")
+        var text = $(steps[index]).children(".msg").text()
+        var component;
+        if(index === 0){
+            $("#dbselect").css("display", "inline");
+            $("#dbselect").show();
+            changeDatabase(dbName)
+            component = $(steps[index]).find(".component").children();
+        }else{
+            $("#dbselect").hide();
+        }
+        if(component){
+            $("#step-tip").append(component);
+        }else{
+            $("#step-tip").text("");
+        }
+        $("#step-tip").prepend("第 " + (index + 1) + " 步" +" ["+" "+text+" "+"] ")
         $(steps[index]).show(0)
     }
 
@@ -141,7 +185,7 @@ $(function(){
             $.ajax({ //valid database infomation
                 type: "POST",
                 async:false,
-                url:"/install/db/mysql",
+                url:"/install/db/"+dbName,
                 data:db,
                 success:function(data){
                     layer.close(loadIndex)
@@ -165,9 +209,11 @@ $(function(){
         var flag = true;
         var notEmptys = $(step).find(".not-empty")
         for (var i = 0;i<notEmptys.length;i++){
-            if(is.empty($(notEmptys[i]).val())){
+            if((!$(notEmptys[i]).parent().hasClass("hidden")) && is.empty($(notEmptys[i]).val())){
                 $(notEmptys[i]).parent().addClass("has-error")
                 flag = false;
+            }else{
+                flag = true;
             }
         }
         if(!flag){

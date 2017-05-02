@@ -10,3 +10,6 @@ body{
     margin-right: auto;
     margin-top:10%;
 }
+.hidden{
+    display: none;
+}

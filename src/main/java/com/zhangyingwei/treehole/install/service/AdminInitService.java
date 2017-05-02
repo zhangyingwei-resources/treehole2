@@ -17,7 +17,7 @@ public class AdminInitService {
         try {
             adminInitDao.insertOne(adminConf);
         } catch (Exception e) {
-            throw new TreeHoleException("初始化管理端信息错误");
+            throw new TreeHoleException("初始化管理端信息错误",e);
         }
     }
 }

@@ -9,6 +9,13 @@ import static org.junit.Assert.*;
  */
 public class DbUtilsTest {
     @Test
+    public void sqliteValid() throws Exception {
+        String url = "jdbc:sqlite:treehole.db";
+        Boolean valid = DbUtils.sqliteValid(url);
+        System.out.println(valid);
+    }
+
+    @Test
     public void mysqlValid() throws Exception {
         String url = "jdbc:mysql://zhangyingwei.com:3306";
         String username = "root";

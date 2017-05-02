@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @ComponentScan("com.zhangyingwei.treehole")
 @Configuration
-@MapperScan(basePackages = "com.zhangyingwei.treehole")
+@MapperScan(basePackages = {"com.zhangyingwei.treehole.install.dao"})
 public class TreeholeApplication {
 
 	public static void main(String[] args) {

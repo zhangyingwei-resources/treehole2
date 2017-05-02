@@ -13,9 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class DbConf {
     @NotEmpty(message = "url不能为空")
     private String url;
-    @NotEmpty(message = "用户名不能为空")
     private String username;
-    @NotEmpty(message = "密码不能为空")
     private String password;
 
     public String getUrl() {

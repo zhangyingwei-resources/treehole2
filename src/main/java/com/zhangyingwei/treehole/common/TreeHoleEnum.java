@@ -6,7 +6,9 @@ package com.zhangyingwei.treehole.common;
  */
 public enum TreeHoleEnum {
     INSTALL_LOCK("install.lock"),//安装检测文件
-    DB_MYSQL_CLASS("com.mysql.jdbc.Driver")
+    CONF_INSTALL_SQL("install.sql"),
+    DB_MYSQL_CLASS("com.mysql.jdbc.Driver"),
+    DB_SQLITE_CLASS("org.sqlite.JDBC")
     ;
 
     private String value;
