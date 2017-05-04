@@ -18,4 +18,15 @@ public class PropertiesUtilsTest {
         PropertiesUtils.createProperties("config.properties","");
     }
 
+    @Test
+    public void test(){
+        label:for (int i = 0; i < 10; i++) {
+            System.out.println((Integer) i);
+            if(i == 2){
+                break label;
+
+            }
+        }
+    }
+
 }

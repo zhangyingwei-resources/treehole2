@@ -71,7 +71,9 @@ public class InstallController {
     @PostMapping("/db/make")
     @ResponseBody
     public Map makeDatabase(@Valid DbConf dbConf) throws TreeHoleException {
+        //创建数据库
         TreeHoleUtils.makeDatabase(dbConf);
+        //创建数据库表
         TreeHoleUtils.makeTables(dbConf);
         return Ajax.success("数据库初始化成功");
     }
