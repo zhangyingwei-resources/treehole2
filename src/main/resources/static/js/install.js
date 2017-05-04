@@ -279,7 +279,7 @@ $(function(){
         if(dbMake(dbinfo)){
             if(blogInit(bloginfo)){
                 if(adminInit(admininfo)){
-
+                    layer.alert("treehole博客安装成功");
                 }
             }
         }

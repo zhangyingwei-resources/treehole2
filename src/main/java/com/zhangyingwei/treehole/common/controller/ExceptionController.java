@@ -24,7 +24,7 @@ public class ExceptionController {
     private Logger logger = LoggerFactory.getLogger(ExceptionHandler.class);
 
     @ResponseBody
-    @ExceptionHandler(value = {BindException.class, TreeHoleException.class})
+    @ExceptionHandler(value = {BindException.class, TreeHoleException.class,NullPointerException.class})
     public Object bindExceptionHandler(Exception ex){
         String message = "";
         logger.info("hello exception: "+message);

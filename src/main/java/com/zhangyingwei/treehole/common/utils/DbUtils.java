@@ -85,6 +85,7 @@ public class DbUtils {
     public static void execute(Connection connection, String sql) throws SQLException {
         Statement statement = connection.createStatement();
         statement.execute(sql);
+        statement.close();
     }
 
     /**

@@ -72,7 +72,7 @@ public class InstallController {
     @ResponseBody
     public Map makeDatabase(@Valid DbConf dbConf) throws TreeHoleException {
         //创建数据库
-        TreeHoleUtils.makeDatabase(dbConf);
+//        TreeHoleUtils.makeDatabase(dbConf);
         //创建数据库表
         TreeHoleUtils.makeTables(dbConf);
         return Ajax.success("数据库初始化成功");
@@ -80,8 +80,9 @@ public class InstallController {
 
     @PostMapping("/blog/init")
     @ResponseBody
-    public Map initBlog(@Valid BlogConf blogConf){
-        return Ajax.success("success");
+    public Map initBlog(@Valid BlogConf blogConf) throws TreeHoleException {
+        this.adminInitService.blogInfoInit(blogConf);
+        return Ajax.success("初始化博客信息成功");
     }
 
     @PostMapping("/admin/init")

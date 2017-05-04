@@ -81,7 +81,7 @@ public class TreeHoleUtils {
             String line = reader.readLine();
             while(line!=null){
                 if(line.replaceAll("#","").trim().equals(common)){
-                    while (line != null && (!(line = reader.readLine()).trim().startsWith("#"))) {
+                    while ((line = reader.readLine()) != null && (!line.trim().startsWith("#"))) {
                         if(StringUtils.isNotEmpty(line)){
                             sqlList.add(line);
                         }

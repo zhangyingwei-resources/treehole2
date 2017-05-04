@@ -1,6 +1,10 @@
 package com.zhangyingwei.treehole.common.utils;
 
+import com.zhangyingwei.treehole.install.model.DbConf;
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.sql.Connection;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +12,14 @@ import static org.junit.Assert.*;
  * Created by zhangyw on 2017/4/25.
  */
 public class DbUtilsTest {
+    @Test
+    public void execute() throws Exception {
+        DbConf dbConf = new DbConf();
+        dbConf.setUrl("jdbc:sqlite:treehole.db");
+        Connection connection = DbUtils.getConnection(dbConf);
+        Assert.assertNotNull(connection);
+    }
+
     @Test
     public void sqliteValid() throws Exception {
         String url = "jdbc:sqlite:treehole.db";
